@@ -1,5 +1,6 @@
 import unittest
 from htmlnode import HTMLNode
+from leafnode import LeafNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_repr(self):
@@ -33,6 +34,14 @@ class TestHTMLNode(unittest.TestCase):
         node = HTMLNode("h1", "This is a Test", None, {})
         expected = ""
         self.assertEqual(node.props_to_html(), expected)
+
+    def test_leafnode_to_html(self):
+        """
+        Test for LeafNode creation behaviour
+        """
+        leafnode = LeafNode("h1", "This is a Test-LeafNode",{"href": "https://www.google.com", "target": "_blank"})
+        expected = "<h1 href=\"https://www.google.com\" target=\"_blank\">This is a Test-LeafNode</h1>"
+        self.assertEqual(leafnode.to_html(), expected)
 
 if __name__ == "__main__":
     unittest.main()
