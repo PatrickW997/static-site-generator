@@ -43,6 +43,22 @@ class TestLeafNode(unittest.TestCase):
         expected = "<h1 href=\"https://www.google.com\" target=\"_blank\">This is a Test-LeafNode</h1>"
         self.assertEqual(leafnode.to_html(), expected)
 
+    def test_leafnode_to_html_tag_none(self):
+        """
+        Test for LeafNode creation with tag=None
+        """
+        leafnode = LeafNode(None, "This is a Test-LeafNode",{"href": "https://www.google.com", "target": "_blank"})
+        expected = "This is a Test-LeafNode"
+        self.assertEqual(leafnode.to_html(), expected)
+
+    def test_leafnode_to_html_value_none(self):
+        """
+        Test for LeafNode creation with value=None
+        """
+        leafnode = LeafNode("h1", None, {"href": "https://www.google.com", "target": "_blank"})
+        self.assertRaises(ValueError, leafnode.to_html)
+
+
 class TestParentNode(unittest.TestCase):
     def test_to_html_with_children(self):
         child_node = LeafNode("span", "child")
