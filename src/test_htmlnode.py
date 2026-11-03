@@ -76,8 +76,8 @@ class TestParentNode(unittest.TestCase):
         )
 
 
-
+# to make the test execute when running the file itself
+# python src/test_htmlnode.py
 
 if __name__ == "__main__":
     unittest.main()
-

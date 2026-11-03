@@ -15,3 +15,8 @@ class TestExtractMarkdownImage(unittest.TestCase):
             "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png)"
         )
         self.assertListEqual([("image", "https://i.imgur.com/zjjcJKZ.png")], matches)
+
+# to make the test execute when running the file itself
+# python src/test_extract_markdown.py
+if __name__ == "__main__":
+    unittest.main()

@@ -18,6 +18,7 @@ class TestSplitNodesDelimiter(unittest.TestCase):
             ],
         )
 
-
+# to make the test execute when running the file itself
+# python src/test_inline_markdown.py
 if __name__ == "__main__":
     unittest.main()

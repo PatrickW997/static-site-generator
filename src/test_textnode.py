@@ -37,6 +37,7 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("This is a text node", "")
         self.assertRaises(Exception, text_node_to_html_node,node)
 
+# to make the test execute when running the file itself
+# python src/test_textnode.py
 if __name__ == "__main__":
     unittest.main()
-
