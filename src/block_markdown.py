@@ -1,4 +1,5 @@
 from textnode import TextNode, TextType
+from htmlnode import HTMLNode, ParentNode, LeafNode
 from enum import Enum
 import re
 
@@ -51,3 +52,14 @@ def block_to_block_type(md_text_block: str) -> BlockType:
         return BlockType.ORDERED_LIST
     return BlockType.PARAGRAPH
 
+def markdown_to_html_node(markdown: str) -> ParentNode:
+    md_block_list = markdown_to_blocks(markdown)
+    converted_markdown = []
+    for block in md_block_list:
+        block_blocktype = block_to_block_type(block)
+        if block_blocktype == BlockType.PARAGRAPH:
+            converted_markdown.append(ParentNode("p", [])) # children has to be filled in instead of empty list
+    return ParentNode("div",converted_markdown)
+
+def text_to_children(text_value : str) -> list[HTMLNode]: # helper function that will find children for above
+    pass
