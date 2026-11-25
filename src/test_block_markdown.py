@@ -1,6 +1,7 @@
 # test_block_markdown.py
 import unittest
 from block_markdown import markdown_to_blocks
+from blocknode import block_to_block_type, BlockType
 
 class TestMarkdownToBlocks(unittest.TestCase):
     def test_markdown_to_blocks(self):
@@ -54,3 +55,21 @@ Third block
         blocks_2 = markdown_to_blocks("")
         self.assertEqual(blocks, [])
         self.assertEqual(blocks_2, [])
+
+
+class TestBlockToBlockType(unittest.TestCase):
+    def test_heading_and_code(self):
+        self.assertEqual(block_to_block_type("# heading"), BlockType.HEADING)
+        self.assertEqual(block_to_block_type("###### heading 6"), BlockType.HEADING)
+        self.assertEqual(block_to_block_type("```\ncode\n```"), BlockType.CODE)
+
+    def test_quote_and_lists(self):
+        self.assertEqual(block_to_block_type("> a\n> b"), BlockType.QUOTE)
+        self.assertEqual(block_to_block_type("- a\n- b"), BlockType.UNORDERED_LIST)
+        self.assertEqual(block_to_block_type("1. a\n2. b\n3. c"), BlockType.ORDERED_LIST)
+
+    def test_paragraph_fallbacks(self):
+        self.assertEqual(block_to_block_type("just text\nmore text"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("####### seven"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("- a\nb"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("2. a\n3. b"), BlockType.PARAGRAPH)
