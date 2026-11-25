@@ -51,7 +51,7 @@ Third block
 
     def test_markdown_to_blocks_empty(self):
         blocks = markdown_to_blocks("")
-        blocks_2 = markdown_to_blocks("")
+        blocks_2 = markdown_to_blocks("    ")
         self.assertEqual(blocks, [])
         self.assertEqual(blocks_2, [])
 
@@ -69,6 +69,6 @@ class TestBlockToBlockType(unittest.TestCase):
 
     def test_paragraph_fallbacks(self):
         self.assertEqual(block_to_block_type("just text\nmore text"), BlockType.PARAGRAPH)
-        self.assertEqual(block_to_block_type("####### seven"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("####### seven"), BlockType.PARAGRAPH) # shouldn't match heading as max "#" are supported
         self.assertEqual(block_to_block_type("- a\nb"), BlockType.PARAGRAPH)
         self.assertEqual(block_to_block_type("2. a\n3. b"), BlockType.PARAGRAPH)
