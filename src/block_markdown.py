@@ -1,5 +1,6 @@
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
 from htmlnode import HTMLNode, ParentNode, LeafNode
+from inline_markdown import text_to_textnodes
 from enum import Enum
 import re
 
@@ -62,4 +63,8 @@ def markdown_to_html_node(markdown: str) -> ParentNode:
     return ParentNode("div",converted_markdown)
 
 def text_to_children(text_value : str) -> list[HTMLNode]: # helper function that will find children for above
-    pass
+    textnodes_list = text_to_textnodes(text_value)
+    htmlnode_list = []
+    for node in textnodes_list:
+        htmlnode_list.append(text_node_to_html_node(node))
+    return htmlnode_list
