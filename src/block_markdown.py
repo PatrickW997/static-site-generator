@@ -1,8 +1,8 @@
+import re
 from textnode import TextNode, TextType, text_node_to_html_node
 from htmlnode import HTMLNode, ParentNode, LeafNode
 from inline_markdown import text_to_textnodes
 from enum import Enum
-import re
 
 
 class BlockType(Enum):
