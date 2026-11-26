@@ -59,7 +59,8 @@ def markdown_to_html_node(markdown: str) -> ParentNode:
     for block in md_block_list:
         block_blocktype = block_to_block_type(block)
         if block_blocktype == BlockType.PARAGRAPH:
-            converted_markdown.append(ParentNode("p", text_to_children(block)))
+            paragraph_text = block.replace("\n", " ")
+            converted_markdown.append(ParentNode("p", text_to_children(paragraph_text)))
     return ParentNode("div",converted_markdown)
 
 def text_to_children(text_value : str) -> list[HTMLNode]: # helper function that will find children for above
